@@ -27,21 +27,6 @@ class ReplacementEmployee(models.Model):
         return f"Смена {self.replacements} для {self.employee}"
 
 
-class ReplacementStatus(models.Model):
-    code = models.CharField('Код', max_length=16, primary_key=True)
-    name = models.CharField('Название', max_length=32)
-    sort = models.PositiveSmallIntegerField('Сортировка', null=True, blank=True)
-    is_active = models.BooleanField('Активность', default=True)
-
-
-    class Meta:
-        verbose_name = "Статус смены"
-        verbose_name_plural = "Статусы смены"
-        ordering = ("sort",)
-
-    def __str__(self):
-        return f"{self.code} для {self.name}"
-
 class Replacement(models.Model):
     group = models.ForeignKey(
         to='breaks.Group', on_delete=models.CASCADE, related_name="replacements",
