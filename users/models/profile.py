@@ -10,7 +10,6 @@ class Profile(models.Model):
         verbose_name = 'Профиль пользователя'
         verbose_name_plural = 'Профили пользователя'
 
-
     def __str__(self):
         return f'{self.user} ({self.pk})'
 
