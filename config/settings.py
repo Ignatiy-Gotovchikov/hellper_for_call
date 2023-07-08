@@ -30,11 +30,13 @@ INSTALLED_APPS += [
     'django_filters',
     'corsheaders',
     'djoser',
+    'phonenumber_field',
 ]
 
 # apps
 INSTALLED_APPS += [
     'api',
+    'users',
     'common',
     'breaks',
 ]
@@ -43,6 +45,11 @@ INSTALLED_APPS += [
 INSTALLED_APPS += [
     'drf_spectacular',
 ]
+
+# Custom user model
+AUTH_USER_MODEL = 'users.User'
+# Custom backend
+AUTHENTICATION_BACKENDS = ('users.backends.AuthBackend',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
