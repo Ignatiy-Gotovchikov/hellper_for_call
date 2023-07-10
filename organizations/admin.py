@@ -31,8 +31,10 @@ class ProfileBreakInline(admin.StackedInline):
 class OrganisationAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'director',)
     filter_vertical = ('employees',)
-
     inlines = (EmployeeInline,)
+    readonly_fields = (
+        'created_at', 'created_by', 'updated_at', 'updated_by',
+    )
 
 
 @admin.register(groups.Group)
@@ -43,6 +45,9 @@ class GroupAdmin(admin.ModelAdmin):
     inlines = (
         ProfileBreakInline,
         MemberInline,
+    )
+    readonly_fields = (
+        'created_at', 'created_by', 'updated_at', 'updated_by',
     )
 
 
