@@ -39,6 +39,7 @@ INSTALLED_APPS += [
     'users',
     'common',
     'breaks',
+    'organizations',
 ]
 
 # after apps
