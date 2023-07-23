@@ -6,7 +6,6 @@ from organizations.urls import urlpatterns as organizations_urls
 from breaks.urls import urlpatterns as breaks_urls
 
 
-
 app_name = 'api'
 
 urlpatterns = [

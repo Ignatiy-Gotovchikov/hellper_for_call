@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import TabularInline
 
 from breaks.models.replacements import GroupInfo
-from organizations.models import organizations, groups, dicts
+from organizations.models import organizations, groups, dicts, offers
 
 ##############################
 # INLINES
@@ -54,6 +54,16 @@ class GroupAdmin(admin.ModelAdmin):
 @admin.register(dicts.Position)
 class PositionAdmin(admin.ModelAdmin):
     list_display = ("code", "name", "sort", "is_active", )
+
+
+@admin.register(offers.Offer)
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ('id', 'organization', 'org_accept', 'user', 'user_accept',)
+    search_fields = ('organization__name', 'user__last_name',)
+
+    readonly_fields = (
+        'created_at', 'created_by', 'updated_at', 'updated_by',
+    )
 
 
 

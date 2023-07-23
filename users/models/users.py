@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
@@ -18,7 +18,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
-    # is_corporate_account = models.BooleanField('Корпоративный аккаунт', default=False)
+    is_corporate_account = models.BooleanField('Корпоративный аккаунт', default=False)
 
     objects = CustomUserManager()
 
@@ -37,5 +37,11 @@ class User(AbstractUser):
 def post_save_user(sender, instance, created, **kwargs):
         if not hasattr(instance, 'profile'):
             Profile.objects.create(user=instance)
+
+
+# Adding properties to Group model
+Group.add_to_class(
+    'code', models.CharField('Code', max_length=32, null=True, unique=True)
+)
 
 

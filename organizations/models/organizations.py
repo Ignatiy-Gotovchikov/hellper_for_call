@@ -29,6 +29,7 @@ class Organization(InfoMixin):
         return f"{self.name} ({self.pk})"
 
 
+
 class Employee(models.Model):
     organization = models.ForeignKey(
         'Organization', models.CASCADE, 'employees_info',

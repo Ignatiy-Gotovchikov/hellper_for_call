@@ -12,8 +12,8 @@ from rest_framework.status import HTTP_204_NO_CONTENT
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-# from common.views.mixins import ListViewSet
-# from users.permissions import IsNotCorporate
+from common.views.mixins import ListViewSet
+from users.permissions import IsNotCorporate
 from users.serializers.api import users as user_s
 
 User = get_user_model()
@@ -31,8 +31,8 @@ class RegistrationView(generics.CreateAPIView):
 @extend_schema_view(
     post=extend_schema(
         request=user_s.ChangePasswordSerializer,
-        summary='Смена пароля', tags=['Аутентификация & Авторизация'])
-    )
+        summary='Смена пароля', tags=['Аутентификация & Авторизация']),
+)
 class ChangePasswordView(APIView):
 
     def post(self, request):
@@ -51,7 +51,7 @@ class ChangePasswordView(APIView):
     patch=extend_schema(summary='Изменить частично профиль пользователя', tags=['Пользователи']),
 )
 class MeView(RetrieveUpdateAPIView):
-    # permission_classes = [IsNotCorporate]
+    permission_classes = [IsNotCorporate]
     queryset = User.objects.all()
     serializer_class = user_s.MeSerializer
     http_method_names = ('get', 'patch')
@@ -63,17 +63,15 @@ class MeView(RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
-#
-#
-# @extend_schema_view(
-#     list=extend_schema(summary='Список пользователей Search', tags=['Словари']),
-# )
-# class UserListSearchView(ListViewSet):
-#     queryset = User.objects.exclude(
-#         Q(is_superuser=True) | Q(is_corporate_account=True)
-#     )
-#     serializer_class = user_s.UserSearchListSerializer
-#     filter_backends = (
-#         SearchFilter,
-#     )
-#     search_fields = ('last_name', 'email', 'username',)
+
+
+@extend_schema_view(
+    list=extend_schema(summary='Список пользователей Search', tags=['Словари']),
+)
+class UserListSearchView(ListViewSet):
+    queryset = User.objects.all()
+    serializer_class = user_s.UserSearchListSerializer
+    # filter_backends = (
+    #     SearchFilter,
+    # )
+    # search_fields = ('last_name', 'email', 'username',)

@@ -6,10 +6,8 @@ from django.db import transaction
 from rest_framework import serializers
 from rest_framework.exceptions import ParseError
 
-from users.serializers.nested.profile import ProfileShortSerializer, ProfileUpdateSerializer
-
-# from users.serializers.nested.profile import ProfileShortSerializer, \
-#     ProfileUpdateSerializer
+from users.serializers.nested.profile import ProfileShortSerializer, \
+    ProfileUpdateSerializer
 
 User = get_user_model()
 
@@ -75,8 +73,6 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         return instance
 
 
-
-
 class MeSerializer(serializers.ModelSerializer):
     profile = ProfileShortSerializer()
 
@@ -113,19 +109,12 @@ class MeUpdateSerializer(serializers.ModelSerializer):
         # Проверка наличия профиля
         profile_data = validated_data.pop('profile') if 'profile' in validated_data else None
 
-        if profile_data:
-            profile = instance.profile
-            for key, value in profile_data.items():
-                if hasattr(profile, key):
-                    setattr(profile, key, value)
-            profile.save()
-
         with transaction.atomic():
             instance = super().update(instance, validated_data)
 
-        # Update профиля
-        if profile_data:
-            self._update_profile(instance.profile, profile_data)
+            # # Update профиля
+            if profile_data:
+                self._update_profile(instance.profile, profile_data)
 
         return instance
 
@@ -137,13 +126,13 @@ class MeUpdateSerializer(serializers.ModelSerializer):
         profile_serializer.save()
 
 
-# class UserSearchListSerializer(serializers.ModelSerializer):
-#
-#     class Meta:
-#         model = User
-#         fields = (
-#             'id',
-#             'username',
-#             'email',
-#             'full_name',
-#         )
+class UserSearchListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'email',
+            'full_name',
+        )
