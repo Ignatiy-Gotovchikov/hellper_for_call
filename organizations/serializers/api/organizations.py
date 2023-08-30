@@ -24,21 +24,9 @@ class OrganizationSearchListSerializer(ExtendedModelSerializer):
 
 class OrganizationListSerializer(ExtendedModelSerializer):
     director = UserShortSerializer()
-    # pax = serializers.IntegerField()
-    # groups_count = serializers.IntegerField()
-    # can_manage = serializers.BooleanField()
 
     class Meta:
         model = Organization
-        # fields = (
-        #     'id',
-        #     'name',
-        #     'director',
-        #     'pax',
-        #     'groups_count',
-        #     'created_at',
-        #     'can_manage',
-        # )
 
         fields = (
             'id',
@@ -49,21 +37,9 @@ class OrganizationListSerializer(ExtendedModelSerializer):
 
 class OrganizationRetrieveSerializer(ExtendedModelSerializer):
     director = UserShortSerializer()
-    # pax = serializers.IntegerField()
-    # groups_count = serializers.IntegerField()
-    # can_manage = serializers.BooleanField()
 
     class Meta:
         model = Organization
-        # fields = (
-        #     'id',
-        #     'name',
-        #     'director',
-        #     'pax',
-        #     'groups_count',
-        #     'created_at',
-        #     'can_manage',
-        # )
 
         fields = (
             'id',
@@ -79,27 +55,6 @@ class OrganizationCreateSerializer(ExtendedModelSerializer):
             'id',
             'name',
         )
-    #
-    # def validate_name(self, value):
-    #     if self.Meta.model.objects.filter(name=value):
-    #         raise ParseError(
-    #             'Организация с таким названием уже существует'
-    #         )
-    #     return value
-    #
-    # def validate(self, attrs):
-    #     user = get_current_user()
-    #     attrs['director'] = user
-    #     return attrs
-    #
-    # def create(self, validated_data):
-    #     with transaction.atomic():
-    #         instance = super().create(validated_data)
-    #         instance.employees.add(
-    #             validated_data['director'],
-    #             # through_defaults={'position_id': DIRECTOR_POSITION, }
-    #         )
-    #     return instance
 
 
 class OrganizationUpdateSerializer(ExtendedModelSerializer):

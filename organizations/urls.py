@@ -10,7 +10,6 @@ router.register(r'search', organizations.OrganizationSeachView, 'organizations-s
 router.register(r'(?P<pk>\d+)/employees', employees.EmployeeView, 'employees')
 router.register(r'offers', offers.OfferUserView, 'user-offers')
 router.register(r'(?P<pk>\d+)/offers', offers.OfferOrganisationView, 'org-offers')
-# router.register(r'groups/(?P<pk>\d+)/members', members.MemberView, 'members')
 router.register(r'groups', groups.GroupView, 'groups')
 router.register(r'', organizations.OrganizationView, 'organizations')
 

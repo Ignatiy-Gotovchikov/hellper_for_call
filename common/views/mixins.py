@@ -20,35 +20,12 @@ class ExtendedView:
         if not self.multi_serializer_class:
             return self.serializer_class
 
-        # # define user role codes
-        # user = self.request.user
-        # if user.is_anonymous:
-        #     user_roles = (roles.PUBLIC_GROUP,)
-        # elif user.is_superuser:
-        #     user_roles = (roles.ADMIN_GROUP,)
-        # else:
-        #     user_roles = set(user.groups.all().values_list('code', flat=True))
-
         # define request action or method
         if hasattr(self, 'action') and self.action:
             action = self.action
         else:
             action = self.request.method
 
-        # # Trying to get role + action serializer
-        # for role in user_roles:
-        #     serializer_key = f'{role}__{action}'
-        #     if self.multi_serializer_class.get(serializer_key):
-        #         return self.multi_serializer_class.get(serializer_key)
-        #
-        # # Trying to get role serializer
-        # for role in user_roles:
-        #     serializer_key = role
-        #     if self.multi_serializer_class.get(serializer_key):
-        #         return self.multi_serializer_class.get(serializer_key)
-        #
-        # # Trying to get action serializer or default
-        # return self.multi_serializer_class.get(action) or self.serializer_class
 
     def get_permissions(self):
         # define request action or method
