@@ -1,3 +1,3 @@
 # Helper for call
 
-На данный момент все в ветке dev, в ближайшее время мержить не буду, может вернусь к этому проекту
+Everything is in the dev branch for now, I won't be merging anytime soon, maybe I'll come back to this project
